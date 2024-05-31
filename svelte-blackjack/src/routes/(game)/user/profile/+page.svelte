@@ -1,26 +1,83 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
 
-    const user = null;
+    // const user = null;
+    // async function getUser() {
+    //     return fetch('http://127.0.0.1:8888/user/profile', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': 'Bearer ' + localStorage.getItem('token') || ''
+    //         }}).then(response => {
+    //             if(response.status === 401) {
+    //                 throw new Error('Unauthorized'); 
+    //             }
+    //         })
+    //         .catch(error => {
+    //             if(error.message === 'Unauthorized') {
+    //                 localStorage.removeItem('token');
+    //                 goto('/');
+    //             }
+    //         });
+    // }
 
-    async function getUser() {
-        return fetch('http://127.0.0.1:8888/user/profile', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token') || ''
-            }}).then(response => {
-                if(response.status === 401) {
-                    throw new Error('Unauthorized');
-                }
-            })
-            .catch(error => {
-                if(error.message === 'Unauthorized') {
-                    localStorage.removeItem('token');
-                    goto('/');
-                }
-            });
-    }
+// async function getUser() {
+//     try {
+//         const response = await fetch('http://127.0.0.1:8888/user/profile', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '')
+//             }
+//         });
+
+//         if (response.status === 401) {
+//             throw new Error('Unauthorized');
+//         }
+
+//         const data = await response.json();
+//         user = data;
+//         console.log('User:', user);
+//     } catch (error) {
+//         console.error('Erreur lors de la récupération des informations utilisateur :', error);
+//         if (error.message === 'Unauthorized') {
+//             localStorage.removeItem('token');
+//             goto('/');
+//         }
+//     }
+// }
+
+let user = null;
+
+async function getUser() {
+    return fetch('http://127.0.0.1:8888/user/profile', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + (localStorage.getItem('token') || '')
+        }
+    })
+    .then(response => {
+        if (response.status === 401) {
+            throw new Error('Unauthorized');
+        }
+        return response.json(); // Ajout de l'analyse JSON
+    })
+    .then(data => {
+        user = data; // Mise à jour de `user` avec les données récupérées
+        console.log('User:', user); // Log des données utilisateur
+    })
+    .catch(error => {
+        console.error('Erreur lors de la récupération des informations utilisateur :', error);
+        if (error.message === 'Unauthorized') {
+            localStorage.removeItem('token');
+            goto('/');
+        }
+    });
+}
+
+
+
 </script>
 
 
