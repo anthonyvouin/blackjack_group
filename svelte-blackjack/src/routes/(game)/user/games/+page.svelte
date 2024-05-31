@@ -36,9 +36,7 @@
                 'Authorization': 'Bearer ' + localStorage.getItem('token') || ''
             }}).then(response => {
                 if(response.status === 204) {
-                    console.log(id)
                     games = games.filter(game => game.id !== id);
-                    console.log(games)
                 }
                 if(response.status === 401) {
                     throw new Error('Unauthorized');

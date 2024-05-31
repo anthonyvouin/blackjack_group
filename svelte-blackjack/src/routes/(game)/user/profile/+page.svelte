@@ -65,7 +65,6 @@ async function getUser() {
     })
     .then(data => {
         user = data; // Mise à jour de `user` avec les données récupérées
-        console.log('User:', user); // Log des données utilisateur
     })
     .catch(error => {
         console.error('Erreur lors de la récupération des informations utilisateur :', error);

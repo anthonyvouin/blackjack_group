@@ -56,7 +56,6 @@
                 return response.json()
             })
             .then(data => {
-                console.log(data);
                 currentTurn = data;
             })
             .catch(error => {
@@ -97,7 +96,6 @@
 
             })
             .then(data => {
-                console.log(data);
                 currentTurn = data;
                 waging = false;
 
