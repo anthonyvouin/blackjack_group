@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests\Controller;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class GameControllerTest extends KernelTestCase{
+class GameControllerTest extends WebTestCase{
     
 }

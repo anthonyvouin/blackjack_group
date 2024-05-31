@@ -1,8 +1,8 @@
 <?php
 namespace App\Tests\Controller;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class TurnControllerTest extends KernelTestCase{
+class TurnControllerTest extends WebTestCase{
     
     
 }
