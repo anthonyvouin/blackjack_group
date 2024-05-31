@@ -29,14 +29,16 @@
 
     async function deleteGame(id: string) {
         actionOnGame = id;
-        return fetch('http://127.0.0.1:8888/game/'+id, {
+        return fetch(`http://127.0.0.1:8888/game/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token') || ''
             }}).then(response => {
                 if(response.status === 204) {
+                    console.log(id)
                     games = games.filter(game => game.id !== id);
+                    console.log(games)
                 }
                 if(response.status === 401) {
                     throw new Error('Unauthorized');
