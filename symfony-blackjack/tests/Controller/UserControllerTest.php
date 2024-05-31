@@ -1,34 +1,31 @@
 <?php
 namespace App\Tests\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase{
-
-
-    public function test__createUser(): void
+    public function test__createUserLoginAndDelete(): void
     {
-
         $client = static::createClient();
+        $username = uniqid();
+        $password = uniqid();
+
         $body = json_encode([
-            'email' => 'test@test.fr',
-            'password' => 'test111',
-            'username' => 'test111'
+            'email' => $username . '@test.fr',
+            'password' => $password,
+            'username' => $username
         ]);
 
         $client->request('POST', '/user', [], [], ['CONTENT_TYPE' => 'application/json'], $body);
-     
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
-    }
-    
-    private static function dataProvider_createUser(): array
-    {
-        return [
-            ['POST', 201],
-            ['GET' ]
-            ['DELETE']
-            ['PATCH'],
-            ['PUT']
-        ];
+
+        $client->request('POST', '/login_check', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
+            'username' => $username,
+            'password' => $password,
+        ]));
+
+        $response = $client->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $data = json_decode($response->getContent(), true);
+        $this->assertArrayHasKey('token', $data);
     }
 }
