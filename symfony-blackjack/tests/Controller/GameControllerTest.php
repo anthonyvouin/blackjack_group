@@ -18,7 +18,7 @@ class GameControllerTest extends WebTestCase{
         $client->request('POST', '/game', [], [], ['CONTENT_TYPE' => 'application/json', 'HTTP_Authorization' => 'Bearer '.$jwt]);
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
 
-        $client = static::createClient();
+        // Utilisez le même client pour la deuxième requête
         $client->request('POST', '/game', [], [], ['CONTENT_TYPE' => 'application/json']);
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
