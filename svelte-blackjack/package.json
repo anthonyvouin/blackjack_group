@@ -17,6 +17,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@types/node": "20.12.12",
     "autoprefixer": "10.4.19",
+    "cypress": "^13.10.0",
     "iconify-icon": "^2.1.0",
     "postcss": "8.4.38",
     "svelte": "^4.2.7",
