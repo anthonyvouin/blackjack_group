@@ -15,13 +15,13 @@ class UserControllerTest extends WebTestCase
         for ($i = 0; $i < 10; $i++) {
             $username = uniqid();
             $password = uniqid();
-    
+
             $body = json_encode([
                 'email' => $username . '@test.fr',
                 'password' => $password,
                 'username' => $username
             ]);
-    
+
             $this->client->request('POST', '/user', [], [], ['CONTENT_TYPE' => 'application/json'], $body);
             $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
         }
@@ -33,7 +33,8 @@ class UserControllerTest extends WebTestCase
         parent::tearDown();
     }
 
-    public function test__createUserLoginAndDelete(): void
+
+    public function test__createUser(): void
     {
         $username = uniqid();
         $password = uniqid();
@@ -46,6 +47,12 @@ class UserControllerTest extends WebTestCase
 
         $this->client->request('POST', '/user', [], [], ['CONTENT_TYPE' => 'application/json'], $body);
         $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function test__loginUser(): void
+    {
+        $username = 'admin';
+        $password = 'admin';
 
         $this->client->request('POST', '/login_check', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
             'username' => $username,
@@ -58,7 +65,6 @@ class UserControllerTest extends WebTestCase
         $this->assertArrayHasKey('token', $data);
     }
 
-    
     public function test__getUserList(): void
     {
         $this->client->request('POST', '/login_check', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
