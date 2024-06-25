@@ -1,4 +1,4 @@
-describe('Ecosia.org Demo', function() {
+describe('Signup Demo', function() {
     this.tags = ['demo'];
   
     before(browser => browser.navigateTo('http://localhost:5173/signup'));

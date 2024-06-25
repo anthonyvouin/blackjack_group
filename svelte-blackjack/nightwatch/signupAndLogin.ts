@@ -1,4 +1,4 @@
-describe('Ecosia.org Demo', function() {
+describe('Signup & Login Demo', function() {
     this.tags = ['demo'];
     const username = 'test35';
     const email = 'test35@test.fr';
